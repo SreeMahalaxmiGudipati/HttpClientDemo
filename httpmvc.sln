@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "httpmvc", "httpmvc\httpmvc.csproj", "{770C0A85-5F6C-48F5-897D-35FC45BD9D8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{770C0A85-5F6C-48F5-897D-35FC45BD9D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{770C0A85-5F6C-48F5-897D-35FC45BD9D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{770C0A85-5F6C-48F5-897D-35FC45BD9D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{770C0A85-5F6C-48F5-897D-35FC45BD9D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91B65B39-F8B9-44CB-AE22-FC663F7C8E31}
+	EndGlobalSection
+EndGlobal
