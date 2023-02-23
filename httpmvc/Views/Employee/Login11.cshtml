@@ -1,0 +1,39 @@
+﻿@model IEnumerable<httpmvc.Models.EmployeeViewModel>
+
+@{
+    ViewData["Title"] = "View";
+}
+@if (ViewData.ModelState.Any(x => x.Key == string.Empty && x.Value.Errors.Any()))
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<form method="post">
+    <table>
+        <tr>
+            <td>UserName</td>
+            <td>
+                <input for="Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="password" for="Password" />
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" />
+              
+
+            </td>
+        </tr>
+    </table>
+</form>

@@ -95,11 +95,12 @@ namespace httpmvc.Controllers
      
 
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login11(string username, string password)
         {
+            EmployeeViewModel model = new EmployeeViewModel();
             // Set up the authentication endpoint URL and payload
             var url = "https://localhost:7068/api/Students";
-            var payload = new { Name = username, Password = password };
+            var payload = new { Name = username,Password = password };
 
             // Send the request and retrieve the response
             var response = await client.PostAsJsonAsync(url, payload);
