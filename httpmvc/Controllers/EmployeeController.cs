@@ -13,18 +13,23 @@ namespace httpmvc.Controllers
 
         public EmployeeController()
         {
+            //creating instance to call httpClient
             client = new HttpClient();
             client.BaseAddress = baseAddress;
         }
 
         public IActionResult Index()
         {
+            //mapping to database
             List<EmployeeViewModel> modelList = new List<EmployeeViewModel>();
+            //returning a message/data from your action and calling GetAsync() method api
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Students").Result;
             if (response.IsSuccessStatusCode)
             {
+
                 string data = response.Content.ReadAsStringAsync().Result;
 
+                //converting string to object
                 modelList = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(data);
             }
             return View(modelList);
@@ -33,6 +38,7 @@ namespace httpmvc.Controllers
  
         public ActionResult Create(EmployeeViewModel model)
         {
+            //converting object to string 
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
@@ -76,7 +82,7 @@ namespace httpmvc.Controllers
 
         public ActionResult Delete(int id)
         {
-         //   EmployeeViewModel model = new EmployeeViewModel();
+         
             HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/Students/" + id).Result;
             if (response.IsSuccessStatusCode)
             {
