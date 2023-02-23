@@ -1,4 +1,5 @@
 ﻿using httpmvc.Models;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -91,7 +92,31 @@ namespace httpmvc.Controllers
             return RedirectToAction("Index");
         }
 
+     
 
+        [HttpPost]
+        public async Task<IActionResult> Login(string username, string password)
+        {
+            // Set up the authentication endpoint URL and payload
+            var url = "https://localhost:7068/api/Students";
+            var payload = new { Name = username, Password = password };
+
+            // Send the request and retrieve the response
+            var response = await client.PostAsJsonAsync(url, payload);
+
+            // Check if the response indicates successful authentication
+            if (response.IsSuccessStatusCode)
+            {
+                // Authentication succeeded
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Authentication failed
+                ModelState.AddModelError(string.Empty, "Invalid username or password");
+                return View("Login");
+            }
+        }
 
     }
 } 
