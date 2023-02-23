@@ -100,22 +100,24 @@ namespace httpmvc.Controllers
             EmployeeViewModel model = new EmployeeViewModel();
             // Set up the authentication endpoint URL and payload
             var url = "https://localhost:7068/api/Students";
-            var payload = new { Name = username,Password = password };
+            var json = $"{{\"username\":\"{username}\",\"password\":\"{password}\"}}";
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            // Send the request and retrieve the response
-            var response = await client.PostAsJsonAsync(url, payload);
+            var request = new HttpRequestMessage(HttpMethod.Post, "checkusernamepassword");
+            request.Content = content;
 
-            // Check if the response indicates successful authentication
+            var response = await client.SendAsync(request);
+
             if (response.IsSuccessStatusCode)
             {
-                // Authentication succeeded
+                // Username and password are correct, redirect to home page
                 return RedirectToAction("Index");
             }
             else
             {
-                // Authentication failed
-                ModelState.AddModelError(string.Empty, "Invalid username or password");
-                return View("Login");
+                // Username and/or password are incorrect, show error message
+                ViewBag.ErrorMessage = "Invalid username or password";
+                return View();
             }
         }
 

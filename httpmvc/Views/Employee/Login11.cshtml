@@ -5,27 +5,27 @@
 }
 
 
-<form method="post">
-    <table>
-        <tr>
-            <td>UserName</td>
-            <td>
-                <input for="Name" />
-            </td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td>
-                <input type="password" for="Password" />
-            </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <input type="submit" />
-              
+@using (Html.BeginForm("login11", "Employee", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+        <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
 
-            </td>
-        </tr>
-    </table>
-</form>
+        <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Login</button>
+            </div>
+        </div>
+}
