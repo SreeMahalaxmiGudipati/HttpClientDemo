@@ -103,8 +103,8 @@ namespace httpmvc.Controllers
 
             var content = new FormUrlEncodedContent(new[]
               {
-                new KeyValuePair<string, string>("username", "Mahalaxmi"),
-                 new KeyValuePair<string, string>("password", "1234")
+                new KeyValuePair<string, string>("Name", "Mahalaxmi"),
+                 new KeyValuePair<string, string>("Password", "1234")
                  });
 
             // Send the request to the server
