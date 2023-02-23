@@ -30,10 +30,7 @@ namespace httpmvc.Controllers
             return View(modelList);
         }
 
-   /*     public ActionResult Create()
-        {
-            return View();
-        }*/
+ 
         public ActionResult Create(EmployeeViewModel model)
         {
             string data = JsonConvert.SerializeObject(model);
@@ -69,7 +66,7 @@ namespace httpmvc.Controllers
             return View("Create", model);
         }
 
-       /* public ActionResult Edit(EmployeeViewModel model)
+        /*public ActionResult Edit(EmployeeViewModel model)
         {
            
             string data = JsonConvert.SerializeObject(model);
