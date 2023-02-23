@@ -74,10 +74,10 @@ namespace httpmvc.Controllers
         }
 
 
-        public ActionResult Delete(int Id)
+        public ActionResult Delete(int id)
         {
-            EmployeeViewModel model = new EmployeeViewModel();
-            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/Students/" + model.Id).Result;
+         //   EmployeeViewModel model = new EmployeeViewModel();
+            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/Students/" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
