@@ -55,20 +55,21 @@ namespace httpmvc.Controllers
 
                 model = JsonConvert.DeserializeObject<EmployeeViewModel>(data);
             }
-            string data1 = JsonConvert.SerializeObject(model);
+          /*  string data1 = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data1, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response12 = client.PutAsync(client.BaseAddress + "/Students/" + model.Id, content).Result;
             if (response12.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
-            }
+            }*/
             return View("Create", model);
         }
 
-        /*public ActionResult Edit(EmployeeViewModel model)
+        [HttpPost]
+        public ActionResult Edit(EmployeeViewModel model)
         {
-           
+
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
@@ -78,7 +79,23 @@ namespace httpmvc.Controllers
                 return RedirectToAction("Index");
             }
             return View("Create", model);
-        }*/
+        }
+
+
+        public ActionResult Delete(int Id)
+        {
+            EmployeeViewModel model = new EmployeeViewModel();
+            var deleteTask = client.DeleteAsync("/Students/" + model.Id);
+
+            var result = deleteTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+
 
     }
 } 
