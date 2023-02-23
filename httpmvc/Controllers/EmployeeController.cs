@@ -100,13 +100,15 @@ namespace httpmvc.Controllers
             EmployeeViewModel model = new EmployeeViewModel();
             // Set up the authentication endpoint URL and payload
             var url = "https://localhost:7068/api/Students";
-            var json = $"{{\"username\":\"{username}\",\"password\":\"{password}\"}}";
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "checkusernamepassword");
-            request.Content = content;
+            var content = new FormUrlEncodedContent(new[]
+              {
+                new KeyValuePair<string, string>("username", "Mahalaxmi"),
+                 new KeyValuePair<string, string>("password", "1234")
+                 });
 
-            var response = await client.SendAsync(request);
+            // Send the request to the server
+            var response = await client.PostAsync(url, content);
 
             if (response.IsSuccessStatusCode)
             {
