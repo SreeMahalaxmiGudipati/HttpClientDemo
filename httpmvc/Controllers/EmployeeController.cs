@@ -84,7 +84,7 @@ namespace httpmvc.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
 
