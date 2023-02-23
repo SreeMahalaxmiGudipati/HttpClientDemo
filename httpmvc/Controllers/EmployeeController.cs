@@ -55,14 +55,6 @@ namespace httpmvc.Controllers
 
                 model = JsonConvert.DeserializeObject<EmployeeViewModel>(data);
             }
-          /*  string data1 = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(data1, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response12 = client.PutAsync(client.BaseAddress + "/Students/" + model.Id, content).Result;
-            if (response12.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index");
-            }*/
             return View("Create", model);
         }
 
@@ -85,14 +77,14 @@ namespace httpmvc.Controllers
         public ActionResult Delete(int Id)
         {
             EmployeeViewModel model = new EmployeeViewModel();
-            var deleteTask = client.DeleteAsync("/Students/" + model.Id);
+            var deleteTask = client.DeleteAsync(client.BaseAddress + "/Students/" + model.Id);
 
             var result = deleteTask.Result;
             if (result.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View();
         }
 
 
