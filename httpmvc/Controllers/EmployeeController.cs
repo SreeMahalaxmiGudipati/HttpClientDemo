@@ -24,13 +24,11 @@ namespace httpmvc.Controllers
         {
             //mapping to database
             List<EmployeeViewModel> modelList = new List<EmployeeViewModel>();
-            //returning a message/data from your action and calling GetAsync() method api
+            //returning data and calling GetAsync() method api
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Students").Result;
             if (response.IsSuccessStatusCode)
             {
-
                 string data = response.Content.ReadAsStringAsync().Result;
-
                 //converting string to object
                 modelList = JsonSerializer.Deserialize<List<EmployeeViewModel>>(data)!;
 
@@ -43,7 +41,7 @@ namespace httpmvc.Controllers
         public ActionResult Create(EmployeeViewModel model)
         {
             //converting object to string 
-            //  string data = JsonConvert.SerializeObject(model);
+        
             string data = JsonSerializer.Serialize(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
