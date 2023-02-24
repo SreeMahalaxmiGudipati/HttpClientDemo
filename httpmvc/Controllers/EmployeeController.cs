@@ -1,7 +1,8 @@
 ﻿using httpmvc.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+// using Newtonsoft.Json;
+using System.Text.Json;
 using System.Text;
 using System.Net.Http;
 
@@ -31,7 +32,9 @@ namespace httpmvc.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;
 
                 //converting string to object
-                modelList = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(data);
+                modelList = JsonSerializer.Deserialize<List<EmployeeViewModel>>(data)!;
+
+             //   modelList = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(data);
             }
             return View(modelList);
         }
@@ -40,7 +43,8 @@ namespace httpmvc.Controllers
         public ActionResult Create(EmployeeViewModel model)
         {
             //converting object to string 
-            string data = JsonConvert.SerializeObject(model);
+            //  string data = JsonConvert.SerializeObject(model);
+            string data = JsonSerializer.Serialize(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Students", content).Result;
@@ -60,7 +64,8 @@ namespace httpmvc.Controllers
             {
                 string data = response.Content.ReadAsStringAsync().Result;
 
-                model = JsonConvert.DeserializeObject<EmployeeViewModel>(data);
+                model = JsonSerializer.Deserialize<EmployeeViewModel>(data)!;
+              //  model = JsonConvert.DeserializeObject<EmployeeViewModel>(data);
             }
             return View("Create", model);
         }
@@ -68,8 +73,8 @@ namespace httpmvc.Controllers
         [HttpPost]
         public ActionResult Edit(EmployeeViewModel model)
         {
-
-            string data = JsonConvert.SerializeObject(model);
+            string data = JsonSerializer.Serialize(model);
+          //  string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/Students/" + model.Id, content).Result;
@@ -98,7 +103,7 @@ namespace httpmvc.Controllers
         public async Task<IActionResult> Login11(string username, string password)
         {
             EmployeeViewModel model = new EmployeeViewModel();
-            // Set up the authentication endpoint URL and payload
+           
             var url = "https://localhost:7068/api/Students";
 
             var content = new FormUrlEncodedContent(new[]
@@ -112,12 +117,10 @@ namespace httpmvc.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                // Username and password are correct, redirect to home page
                 return RedirectToAction("Index");
             }
             else
             {
-                // Username and/or password are incorrect, show error message
                 ViewBag.ErrorMessage = "Invalid username or password";
                 return View();
             }
